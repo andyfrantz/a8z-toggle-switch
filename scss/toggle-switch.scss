@@ -1,0 +1,372 @@
+@use "sass:map";
+
+// theme colors
+$colors: (
+  'blue': #3498db,
+  'red': #e74c3c,
+  'green': #2ecc71,
+  'yellow': #f1c40f,
+  'orange': #e67e22,
+  'purple': #9b59b6,
+  'gray': #555555,
+  'pink': #e91e63,
+  'brown': #795548,
+  'teal': #009688,
+  'indigo': #3f51b5,
+  '_white': #fff,
+  '_black': #000,
+  '_lightGray': #ccc,
+  '_shadowColor': rgba(0, 0, 0, 0.50),
+);
+
+// size definitions
+$sizes: (
+  'xs': ('width': 45px, 'height': 20px, 'switch-width': 20px, 'font-size': 0.5rem),
+  'sm': ('width': 55px, 'height': 25px, 'switch-width': 25px, 'font-size': 0.7rem),
+  'md': ('width': 65px, 'height': 30px, 'switch-width': 30px, 'font-size': 0.8rem),
+  'lg': ('width': 75px, 'height': 35px, 'switch-width': 35px, 'font-size': 1rem),
+  'xl': ('width': 85px, 'height': 40px, 'switch-width': 40px, 'font-size': 1.2rem)
+);
+
+// defaut input text values for checked and unchecked states
+$checked-content: 'ON';
+$unchecked-content: 'OFF';
+
+.a8z-toggle-switch {
+  --a8z-ts-width: #{map.get($sizes, 'md', 'width')};
+  --a8z-ts-height: #{map.get($sizes, 'md', 'height')};
+  --a8z-ts-switch-width: #{map.get($sizes, 'md', 'switch-width')};
+
+  --a8z-ts-color: #{map.get($colors, 'blue')};
+  --a8z-ts-color-unchecked: #{map.get($colors, '_lightGray')};
+  --a8z-ts-shadow-color: #{map.get($colors, '_shadowColor')};
+
+  --a8z-ts-input-font-size: #{map.get($sizes, 'md', 'font-size')};
+  --a8z-ts-input-font-color: #{map.get($colors, '_white')};
+  --a8z-ts-input-checked-content: '#{$checked-content}';
+  --a8z-ts-input-unchecked-content: '#{$unchecked-content}';
+
+  --a8z-ts-switch-background-color: #{map.get($colors, '_white')};
+  --a8z-ts-label-color: #{map.get($colors, '_black')};
+
+
+  color: var(--a8z-ts-input-font-color);
+  display: inline-flex;
+  align-items: center;
+  user-select: none;
+  position: relative;
+  vertical-align: middle;
+  margin-bottom: 0;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &>input[type='checkbox'] {
+    position: absolute;
+    opacity: 0;
+
+    &+.toggle {
+      border-radius: 4px;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      flex-shrink: 0;
+      width: var(--a8z-ts-width);
+      height: var(--a8z-ts-height);
+      margin: 0;
+      cursor: pointer;
+      transition: background 200ms linear, box-shadow 200ms linear;
+
+      &:before {
+        content: var(--a8z-ts-input-checked-content);
+        opacity: 0; // hide the checked text by default
+      }
+
+      &:after {
+        content: var(--a8z-ts-input-unchecked-content);
+        left: var(--a8z-ts-switch-width);
+      }
+
+      &:before,
+      &:after {
+        display: flex;
+        align-items: center;
+        position: absolute;
+        z-index: 2;
+        height: 100%;
+        justify-content: center;
+        width: calc(100% - var(--a8z-ts-switch-width));
+        font-size: var(--a8z-ts-input-font-size);
+        transition: all 200ms linear;
+      }
+
+      &>.switch {
+        background-color: var(--a8z-ts-switch-background-color);
+        border-radius: 6px;
+        display: block;
+        height: 100%;
+        width: var(--a8z-ts-switch-width);
+        position: absolute;
+        right: 0;
+        z-index: 3;
+        box-sizing: border-box;
+        transition: right 200ms linear, border-color 200ms linear;
+      }
+
+      &+.label {
+        color: var(--a8z-ts-label-color);
+        margin-left: 10px;
+      }
+    }
+
+    &:checked {
+      &+.toggle {
+        background-color: var(--a8z-ts-color);
+
+        &:before {
+          // show the checked text
+          opacity: 1;
+        }
+
+        &:after {
+          // hide the unchecked text
+          opacity: 0;
+        }
+
+        &>.switch {
+          border-width: 3px;
+          border-style: solid;
+          border-color: var(--a8z-ts-color);
+        }
+      }
+    }
+
+    &:not(:checked) {
+      &+.toggle {
+        background-color: var(--a8z-ts-color-unchecked);
+
+        &>.switch {
+          border-width: 3px;
+          border-style: solid;
+          border-color: var(--a8z-ts-color-unchecked);
+          right: calc(100% - var(--a8z-ts-switch-width));
+        }
+      }
+    }
+
+    // box shadow for states :focus and :active
+    &:focus,
+    &:active {
+      box-shadow: 0 0 5px 3px var(--a8z-ts-shadow-color);
+    }
+
+    &[disabled] {
+      &+.toggle {
+        opacity: 0.5;
+
+        &:hover {
+          cursor: not-allowed;
+        }
+      }
+    }
+  }
+
+
+  // attribute: data-label
+  //   changes the position of the label
+  //   default position is right
+  //   available positions: left, right
+  //   example: <input type="checkbox" class="toggle-switchy" data-label="left" />
+
+  // label on the left
+  &[data-label='left'] {
+    &>input[type='checkbox']+.toggle {
+      order: 2;
+
+      &+.label {
+        order: 1;
+        margin-left: 0;
+        margin-right: 10px;
+      }
+    }
+  }
+
+
+  // attribute: data-size
+  //   changes the size of the toggle
+  //   default size is medium (md)
+  //   available sizes: xs, sm, md, lg, xl
+  //   example: <input type="checkbox" class="toggle-switchy" data-size="sm" />
+
+  // Size: Extra Large
+  &[data-size='xl'] {
+    --a8z-ts-width: #{map.get($sizes, 'xl', 'width')};
+    --a8z-ts-height: #{map.get($sizes, 'xl', 'height')};
+    --a8z-ts-switch-width: #{map.get($sizes, 'xl', 'switch-width')};
+    --a8z-ts-input-font-size: #{map.get($sizes, 'xl', 'font-size')};
+  }
+
+  // Size: Large
+  &[data-size='lg'] {
+    --a8z-ts-width: #{map.get($sizes, 'lg', 'width')};
+    --a8z-ts-height: #{map.get($sizes, 'lg', 'height')};
+    --a8z-ts-switch-width: #{map.get($sizes, 'lg', 'switch-width')};
+    --a8z-ts-input-font-size: #{map.get($sizes, 'lg', 'font-size')};
+  }
+
+  // Size: Small
+  &[data-size='sm'] {
+    --a8z-ts-width: #{map.get($sizes, 'sm', 'width')};
+    --a8z-ts-height: #{map.get($sizes, 'sm', 'height')};
+    --a8z-ts-switch-width: #{map.get($sizes, 'sm', 'switch-width')};
+    --a8z-ts-input-font-size: #{map.get($sizes, 'sm', 'font-size')};
+  }
+
+  // Size: Extra Small
+  &[data-size='xs'] {
+    --a8z-ts-width: #{map.get($sizes, 'xs', 'width')};
+    --a8z-ts-height: #{map.get($sizes, 'xs', 'height')};
+    --a8z-ts-switch-width: #{map.get($sizes, 'xs', 'switch-width')};
+    --a8z-ts-input-font-size: #{map.get($sizes, 'xs', 'font-size')};
+  }
+
+
+  // attribute: data-style
+  //   change the style of the toggle switch
+  //   default style is tiny rounded (very small border radius)
+  //   available styles: rounded, square
+  //   example: <input type="checkbox" class="toggle-switchy" data-style="square" />
+
+  // Style: Rounded
+  &[data-style='rounded'] {
+
+    &>input[type='checkbox']+.toggle,
+    &>input[type='checkbox']+.toggle>.switch {
+      border-radius: 50px;
+    }
+
+    &>input[type='checkbox']+.toggle {
+
+      &:before,
+      &:after {
+        width: calc(100% - var(--a8z-ts-switch-width) - 5px);
+      }
+
+      &:before {
+        left: 5px;
+      }
+
+      &:after {
+        right: 5px;
+      }
+    }
+  }
+
+  // Style: Square
+  &[data-style='square'] {
+    &>input[type='checkbox']+.toggle {
+      border-radius: 0;
+
+      &>.switch {
+        border-radius: 0;
+      }
+    }
+  }
+
+
+  // attribute: data-color
+  //   change the color of the toggle switch
+  //   default color is blue
+  //   available colors: red, orange, yellow, green, blue, purple, gray
+  //   example: <input type="checkbox" class="toggle-switchy" data-color="red" />
+
+  // Color: Red
+  &[data-color='red'] {
+    --a8z-ts-color: #{map.get($colors, 'red')};
+  }
+
+  // Color: Orange
+  &[data-color='orange'] {
+    --a8z-ts-color: #{map.get($colors, 'orange')};
+  }
+
+  // Color: Yellow
+  &[data-color='yellow'] {
+    --a8z-ts-color: #{map.get($colors, 'yellow')};
+  }
+
+  // Color: Green
+  &[data-color='green'] {
+    --a8z-ts-color: #{map.get($colors, 'green')};
+  }
+
+  // Color: Blue (Default)
+  &[data-color='blue'] {
+    --a8z-ts-color: #{map.get($colors, 'blue')};
+  }
+
+  // Color: Purple
+  &[data-color='purple'] {
+    --a8z-ts-color: #{map.get($colors, 'purple')};
+  }
+
+  // Color: Gray
+  &[data-color='gray'] {
+    --a8z-ts-color: #{map.get($colors, 'gray')};
+  }
+
+  // Color: Pink
+  &[data-color='pink'] {
+    --a8z-ts-color: #{map.get($colors, 'pink')};
+  }
+
+  // Color: Brown
+  &[data-color='brown'] {
+    --a8z-ts-color: #{map.get($colors, 'brown')};
+  }
+
+  // Color: Indigo
+  &[data-color='indigo'] {
+    --a8z-ts-color: #{map.get($colors, 'indigo')};
+  }
+
+  // Color: teal
+  &[data-color='teal'] {
+    --a8z-ts-color: #{map.get($colors, 'teal')};
+  }
+
+
+  // attribute: data-text
+  //   if set ti false, the text will be hidden
+  //   default is true -> default text is 'ON' and 'OFF'
+  //   example: <input type="checkbox" class="toggle-switchy" data-text="false" />
+
+  // Dont show an input text
+  &[data-text='false'] {
+    // adjust the width of the toggle
+    --a8z-ts-width: 60px;
+
+    &>input[type='checkbox']+.toggle:before,
+    &>input[type='checkbox']+.toggle:after {
+      // hide the text
+      content: '';
+    }
+
+    &[data-size='xl'] {
+      --a8z-ts-width: 80px;
+    }
+
+    &[data-size='lg'] {
+      --a8z-ts-toggle-width: 70px;
+    }
+
+    &[data-size='sm'] {
+      --a8z-ts-width: 50px;
+    }
+
+    &[data-size='xs'] {
+      --a8z-ts-width: 40px;
+    }
+  }
+}

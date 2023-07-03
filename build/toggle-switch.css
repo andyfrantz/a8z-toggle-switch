@@ -1,0 +1,210 @@
+.a8z-toggle-switch {
+  --a8z-ts-width: 65px;
+  --a8z-ts-height: 30px;
+  --a8z-ts-switch-width: 30px;
+  --a8z-ts-color: #3498db;
+  --a8z-ts-color-unchecked: #ccc;
+  --a8z-ts-shadow-color: rgba(0, 0, 0, 0.5);
+  --a8z-ts-input-font-size: 0.8rem;
+  --a8z-ts-input-font-color: #fff;
+  --a8z-ts-input-checked-content: "ON";
+  --a8z-ts-input-unchecked-content: "OFF";
+  --a8z-ts-switch-background-color: #fff;
+  --a8z-ts-label-color: #000;
+  color: var(--a8z-ts-input-font-color);
+  display: inline-flex;
+  align-items: center;
+  user-select: none;
+  position: relative;
+  vertical-align: middle;
+  margin-bottom: 0;
+}
+.a8z-toggle-switch:hover {
+  cursor: pointer;
+}
+.a8z-toggle-switch > input {
+  position: absolute;
+  opacity: 0;
+}
+.a8z-toggle-switch > input + .toggle {
+  border-radius: 4px;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+  width: var(--a8z-ts-width);
+  height: var(--a8z-ts-height);
+  margin: 0;
+  cursor: pointer;
+  transition: background 200ms linear, box-shadow 200ms linear;
+}
+.a8z-toggle-switch > input + .toggle:before {
+  content: var(--a8z-ts-input-checked-content);
+  opacity: 0;
+}
+.a8z-toggle-switch > input + .toggle:after {
+  content: var(--a8z-ts-input-unchecked-content);
+  left: var(--a8z-ts-switch-width);
+}
+.a8z-toggle-switch > input + .toggle:before, .a8z-toggle-switch > input + .toggle:after {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  z-index: 2;
+  height: 100%;
+  justify-content: center;
+  width: calc(100% - var(--a8z-ts-switch-width));
+  font-size: var(--a8z-ts-input-font-size);
+  transition: all 200ms linear;
+}
+.a8z-toggle-switch > input + .toggle > .switch {
+  background-color: var(--a8z-ts-switch-background-color);
+  border-radius: 6px;
+  display: block;
+  height: 100%;
+  width: var(--a8z-ts-switch-width);
+  position: absolute;
+  right: 0;
+  z-index: 3;
+  box-sizing: border-box;
+  transition: right 200ms linear, border-color 200ms linear;
+}
+.a8z-toggle-switch > input + .toggle + .label {
+  color: var(--a8z-ts-label-color);
+  margin-left: 10px;
+}
+.a8z-toggle-switch > input:checked + .toggle {
+  background-color: var(--a8z-ts-color);
+}
+.a8z-toggle-switch > input:checked + .toggle:before {
+  opacity: 1;
+}
+.a8z-toggle-switch > input:checked + .toggle:after {
+  opacity: 0;
+}
+.a8z-toggle-switch > input:checked + .toggle > .switch {
+  border-width: 3px;
+  border-style: solid;
+  border-color: var(--a8z-ts-color);
+}
+.a8z-toggle-switch > input:not(:checked) + .toggle {
+  background-color: var(--a8z-ts-color-unchecked);
+}
+.a8z-toggle-switch > input:not(:checked) + .toggle > .switch {
+  border-width: 3px;
+  border-style: solid;
+  border-color: var(--a8z-ts-color-unchecked);
+  right: calc(100% - var(--a8z-ts-switch-width));
+}
+.a8z-toggle-switch > input:focus, .a8z-toggle-switch > input:active {
+  box-shadow: 0 0 5px 3px var(--a8z-ts-shadow-color);
+}
+.a8z-toggle-switch > input[disabled] + .toggle {
+  opacity: 0.5;
+}
+.a8z-toggle-switch > input[disabled] + .toggle:hover {
+  cursor: not-allowed;
+}
+.a8z-toggle-switch[data-label=left] > input + .toggle {
+  order: 2;
+}
+.a8z-toggle-switch[data-label=left] > input + .toggle + .label {
+  order: 1;
+  margin-left: 0;
+  margin-right: 10px;
+}
+.a8z-toggle-switch[data-size=xl] {
+  --a8z-ts-width: 85px;
+  --a8z-ts-height: 40px;
+  --a8z-ts-switch-width: 40px;
+  --a8z-ts-input-font-size: 1.2rem;
+}
+.a8z-toggle-switch[data-size=lg] {
+  --a8z-ts-width: 75px;
+  --a8z-ts-height: 35px;
+  --a8z-ts-switch-width: 35px;
+  --a8z-ts-input-font-size: 1rem;
+}
+.a8z-toggle-switch[data-size=sm] {
+  --a8z-ts-width: 55px;
+  --a8z-ts-height: 25px;
+  --a8z-ts-switch-width: 25px;
+  --a8z-ts-input-font-size: 0.7rem;
+}
+.a8z-toggle-switch[data-size=xs] {
+  --a8z-ts-width: 45px;
+  --a8z-ts-height: 20px;
+  --a8z-ts-switch-width: 20px;
+  --a8z-ts-input-font-size: 0.5rem;
+}
+.a8z-toggle-switch[data-style=rounded] > input + .toggle, .a8z-toggle-switch[data-style=rounded] > input + .toggle > .switch {
+  border-radius: 50px;
+}
+.a8z-toggle-switch[data-style=rounded] > input + .toggle:before, .a8z-toggle-switch[data-style=rounded] > input + .toggle:after {
+  width: calc(100% - var(--a8z-ts-switch-width) - 5px);
+}
+.a8z-toggle-switch[data-style=rounded] > input + .toggle:before {
+  left: 5px;
+}
+.a8z-toggle-switch[data-style=rounded] > input + .toggle:after {
+  right: 5px;
+}
+.a8z-toggle-switch[data-style=square] > input + .toggle {
+  border-radius: 0;
+}
+.a8z-toggle-switch[data-style=square] > input + .toggle > .switch {
+  border-radius: 0;
+}
+.a8z-toggle-switch[data-color=red] {
+  --a8z-ts-color: #e74c3c;
+}
+.a8z-toggle-switch[data-color=orange] {
+  --a8z-ts-color: #e67e22;
+}
+.a8z-toggle-switch[data-color=yellow] {
+  --a8z-ts-color: #f1c40f;
+}
+.a8z-toggle-switch[data-color=green] {
+  --a8z-ts-color: #2ecc71;
+}
+.a8z-toggle-switch[data-color=blue] {
+  --a8z-ts-color: #3498db;
+}
+.a8z-toggle-switch[data-color=purple] {
+  --a8z-ts-color: #9b59b6;
+}
+.a8z-toggle-switch[data-color=gray] {
+  --a8z-ts-color: #555555;
+}
+.a8z-toggle-switch[data-color=pink] {
+  --a8z-ts-color: #e91e63;
+}
+.a8z-toggle-switch[data-color=brown] {
+  --a8z-ts-color: #795548;
+}
+.a8z-toggle-switch[data-color=indigo] {
+  --a8z-ts-color: #3f51b5;
+}
+.a8z-toggle-switch[data-color=teal] {
+  --a8z-ts-color: #009688;
+}
+.a8z-toggle-switch[data-text=false] {
+  --a8z-ts-width: 60px;
+}
+.a8z-toggle-switch[data-text=false] > input + .toggle:before, .a8z-toggle-switch[data-text=false] > input + .toggle:after {
+  content: "";
+}
+.a8z-toggle-switch[data-text=false][data-size=xl] {
+  --a8z-ts-width: 80px;
+}
+.a8z-toggle-switch[data-text=false][data-size=lg] {
+  --a8z-ts-toggle-width: 70px;
+}
+.a8z-toggle-switch[data-text=false][data-size=sm] {
+  --a8z-ts-width: 50px;
+}
+.a8z-toggle-switch[data-text=false][data-size=xs] {
+  --a8z-ts-width: 40px;
+}
+
+/*# sourceMappingURL=toggle-switch.css.map */
