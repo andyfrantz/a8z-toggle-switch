@@ -22,11 +22,11 @@
 .a8z-toggle-switch:hover {
   cursor: pointer;
 }
-.a8z-toggle-switch > input {
+.a8z-toggle-switch > input[type=checkbox] {
   position: absolute;
   opacity: 0;
 }
-.a8z-toggle-switch > input + .toggle {
+.a8z-toggle-switch > input[type=checkbox] + .toggle {
   border-radius: 4px;
   align-items: center;
   position: relative;
@@ -38,15 +38,15 @@
   cursor: pointer;
   transition: background 200ms linear, box-shadow 200ms linear;
 }
-.a8z-toggle-switch > input + .toggle:before {
+.a8z-toggle-switch > input[type=checkbox] + .toggle:before {
   content: var(--a8z-ts-input-checked-content);
   opacity: 0;
 }
-.a8z-toggle-switch > input + .toggle:after {
+.a8z-toggle-switch > input[type=checkbox] + .toggle:after {
   content: var(--a8z-ts-input-unchecked-content);
   left: var(--a8z-ts-switch-width);
 }
-.a8z-toggle-switch > input + .toggle:before, .a8z-toggle-switch > input + .toggle:after {
+.a8z-toggle-switch > input[type=checkbox] + .toggle:before, .a8z-toggle-switch > input[type=checkbox] + .toggle:after {
   display: flex;
   align-items: center;
   position: absolute;
@@ -57,7 +57,7 @@
   font-size: var(--a8z-ts-input-font-size);
   transition: all 200ms linear;
 }
-.a8z-toggle-switch > input + .toggle > .switch {
+.a8z-toggle-switch > input[type=checkbox] + .toggle > .switch {
   background-color: var(--a8z-ts-switch-background-color);
   border-radius: 6px;
   display: block;
@@ -69,46 +69,46 @@
   box-sizing: border-box;
   transition: right 200ms linear, border-color 200ms linear;
 }
-.a8z-toggle-switch > input + .toggle + .label {
+.a8z-toggle-switch > input[type=checkbox] + .toggle + .label {
   color: var(--a8z-ts-label-color);
   margin-left: 10px;
 }
-.a8z-toggle-switch > input:checked + .toggle {
+.a8z-toggle-switch > input[type=checkbox]:checked + .toggle {
   background-color: var(--a8z-ts-color);
 }
-.a8z-toggle-switch > input:checked + .toggle:before {
+.a8z-toggle-switch > input[type=checkbox]:checked + .toggle:before {
   opacity: 1;
 }
-.a8z-toggle-switch > input:checked + .toggle:after {
+.a8z-toggle-switch > input[type=checkbox]:checked + .toggle:after {
   opacity: 0;
 }
-.a8z-toggle-switch > input:checked + .toggle > .switch {
+.a8z-toggle-switch > input[type=checkbox]:checked + .toggle > .switch {
   border-width: 3px;
   border-style: solid;
   border-color: var(--a8z-ts-color);
 }
-.a8z-toggle-switch > input:not(:checked) + .toggle {
+.a8z-toggle-switch > input[type=checkbox]:not(:checked) + .toggle {
   background-color: var(--a8z-ts-color-unchecked);
 }
-.a8z-toggle-switch > input:not(:checked) + .toggle > .switch {
+.a8z-toggle-switch > input[type=checkbox]:not(:checked) + .toggle > .switch {
   border-width: 3px;
   border-style: solid;
   border-color: var(--a8z-ts-color-unchecked);
   right: calc(100% - var(--a8z-ts-switch-width));
 }
-.a8z-toggle-switch > input:focus, .a8z-toggle-switch > input:active {
+.a8z-toggle-switch > input[type=checkbox]:focus, .a8z-toggle-switch > input[type=checkbox]:active {
   box-shadow: 0 0 5px 3px var(--a8z-ts-shadow-color);
 }
-.a8z-toggle-switch > input[disabled] + .toggle {
+.a8z-toggle-switch > input[type=checkbox][disabled] + .toggle {
   opacity: 0.5;
 }
-.a8z-toggle-switch > input[disabled] + .toggle:hover {
+.a8z-toggle-switch > input[type=checkbox][disabled] + .toggle:hover {
   cursor: not-allowed;
 }
-.a8z-toggle-switch[data-label=left] > input + .toggle {
+.a8z-toggle-switch[data-label=left] > input[type=checkbox] + .toggle {
   order: 2;
 }
-.a8z-toggle-switch[data-label=left] > input + .toggle + .label {
+.a8z-toggle-switch[data-label=left] > input[type=checkbox] + .toggle + .label {
   order: 1;
   margin-left: 0;
   margin-right: 10px;
@@ -137,22 +137,22 @@
   --a8z-ts-switch-width: 20px;
   --a8z-ts-input-font-size: 0.5rem;
 }
-.a8z-toggle-switch[data-style=rounded] > input + .toggle, .a8z-toggle-switch[data-style=rounded] > input + .toggle > .switch {
+.a8z-toggle-switch[data-style=rounded] > input[type=checkbox] + .toggle, .a8z-toggle-switch[data-style=rounded] > input[type=checkbox] + .toggle > .switch {
   border-radius: 50px;
 }
-.a8z-toggle-switch[data-style=rounded] > input + .toggle:before, .a8z-toggle-switch[data-style=rounded] > input + .toggle:after {
+.a8z-toggle-switch[data-style=rounded] > input[type=checkbox] + .toggle:before, .a8z-toggle-switch[data-style=rounded] > input[type=checkbox] + .toggle:after {
   width: calc(100% - var(--a8z-ts-switch-width) - 5px);
 }
-.a8z-toggle-switch[data-style=rounded] > input + .toggle:before {
+.a8z-toggle-switch[data-style=rounded] > input[type=checkbox] + .toggle:before {
   left: 5px;
 }
-.a8z-toggle-switch[data-style=rounded] > input + .toggle:after {
+.a8z-toggle-switch[data-style=rounded] > input[type=checkbox] + .toggle:after {
   right: 5px;
 }
-.a8z-toggle-switch[data-style=square] > input + .toggle {
+.a8z-toggle-switch[data-style=square] > input[type=checkbox] + .toggle {
   border-radius: 0;
 }
-.a8z-toggle-switch[data-style=square] > input + .toggle > .switch {
+.a8z-toggle-switch[data-style=square] > input[type=checkbox] + .toggle > .switch {
   border-radius: 0;
 }
 .a8z-toggle-switch[data-color=red] {
@@ -191,7 +191,7 @@
 .a8z-toggle-switch[data-text=false] {
   --a8z-ts-width: 60px;
 }
-.a8z-toggle-switch[data-text=false] > input + .toggle:before, .a8z-toggle-switch[data-text=false] > input + .toggle:after {
+.a8z-toggle-switch[data-text=false] > input[type=checkbox] + .toggle:before, .a8z-toggle-switch[data-text=false] > input[type=checkbox] + .toggle:after {
   content: "";
 }
 .a8z-toggle-switch[data-text=false][data-size=xl] {
