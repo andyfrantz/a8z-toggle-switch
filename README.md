@@ -1,4 +1,5 @@
 # toggle-switch by a8z
+[![Release](https://img.shields.io/github/v/release/andyfrantz/a8z-toggle-switch?style=for-the-badge)](https://github.com/andyfrantz/a8z-toggle-switch/releases)
 [![Size](https://img.shields.io/github/size/andyfrantz/a8z-toggle-switch/build/toggle-switch.css?label=Size&style=for-the-badge)](https://github.com/andyfrantz/a8z-toggle-switch/master/build/toggle-switch.css)
 [![Stars](https://img.shields.io/github/stars/andyfrantz/a8z-toggle-switch?style=for-the-badge)](https://github.com/andyfrantz/a8z-toggle-switch/stargazers)
 [![Issues](https://img.shields.io/github/issues/andyfrantz/a8z-toggle-switch?style=for-the-badge)](https://github.com/andyfrantz/a8z-toggle-switch/issues)
